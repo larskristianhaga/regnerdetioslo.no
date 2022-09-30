@@ -1,3 +1,5 @@
-This repository contains the sourcecode for the website [regnerdetioslo.no](http://regnerdetioslo.no)
+## Regnerdetioslo.no
 
-A simple webpage that shows if it is raining in Oslo or not.
+This repository contains the sourcecode for the website [regnerdetioslo.no](http://regnerdetioslo.no)
+ 
+A simple webpage that shows if it is currently raining in Oslo, or not.
