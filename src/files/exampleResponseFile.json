@@ -1,0 +1,151 @@
+{
+  "created": "2022-09-30T16:19:35+02:00",
+  "update": "2022-09-30T16:24:35+02:00",
+  "radarIsDown": false,
+  "points": [
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T16:25:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T16:30:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T16:35:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T16:40:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T16:45:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.1,
+        "phase": "None"
+      },
+      "time": "2022-09-30T16:50:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.2,
+        "phase": "None"
+      },
+      "time": "2022-09-30T16:55:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T17:00:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T17:05:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T17:10:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T17:15:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T17:20:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T17:25:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T17:30:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T17:35:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T17:40:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T17:45:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T17:50:00+02:00"
+    },
+    {
+      "precipitation": {
+        "intensity": 0.0,
+        "phase": "None"
+      },
+      "time": "2022-09-30T17:55:00+02:00"
+    }
+  ],
+  "status": {
+    "code": "Ok"
+  },
+  "_links": {
+    "self": {
+      "href": "/api/v0/locations/1-72837/forecast/now"
+    },
+    "parent": {
+      "href": "/api/v0/locations/1-72837"
+    }
+  }
+}
