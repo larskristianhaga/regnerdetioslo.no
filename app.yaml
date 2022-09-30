@@ -8,6 +8,3 @@ handlers:
   - url: /.*
     static_files: dist/index.html
     upload: dist/index.html
-# Environment variable for the API key
-env_variables:
-  API_KEY:

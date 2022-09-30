@@ -16,7 +16,7 @@ export default {
     };
   },
   mounted() {
-    const endpointURL = "https://dataservice.accuweather.com/currentconditions/v1/254946?apikey=" + process.env.API_KEY;
+    const endpointURL = "https://dataservice.accuweather.com/currentconditions/v1/254946?apikey=" + import.meta.env.VITE_WEATHER_API_KEY;
 
     axios.get(endpointURL)
       .then((response) => {

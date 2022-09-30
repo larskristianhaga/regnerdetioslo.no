@@ -19,15 +19,12 @@ jobs:
       - name: Running tests
         run: npm run test --if-present
 
-      - name: Appending API Key from Secrets
-        uses: fjogeleit/yaml-update-action@v0.10.0
+      - name: Appending API key to .env file
+        uses: DamianReeves/write-file-action@master
         with:
-          valueFile: 'app.yaml'
-          propertyPath: 'env_variables.API_KEY'
-          value: ${{ secrets.WEATHER_API_KEY }}
-          commitChange: false
-          updateFile: true
-
+          path: ${{ env.home}}/.env
+          contents: ${{ secrets.WEATHER_API_KEY }}
+          write-mode: append
 
       - name: Building the application
         run: npm run build
