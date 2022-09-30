@@ -16,14 +16,14 @@ export default {
     };
   },
   mounted() {
-    const endpointURL = "https://www.yr.no/api/v0/locations/1-72837/forecast/now";
+    const endpointURL = "https://dataservice.accuweather.com/currentconditions/v1/254946?apikey=" + process.env.API_KEY;
 
     axios.get(endpointURL)
       .then((response) => {
-        // Get the first element in the list, since this is the closest to now.
-        const isRainingValue = response.data.points[0].precipitation.intensity;
 
-        isRainingValue !== 0 ?
+        const isRainingValue = response.data[0].HasPrecipitation;
+
+        isRainingValue ?
           this.isItRaining = "Yes..."
           :
           this.isItRaining = "Nope!";
