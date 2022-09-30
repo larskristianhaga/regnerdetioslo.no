@@ -22,7 +22,7 @@ jobs:
       - name: Appending API key to .env file
         uses: DamianReeves/write-file-action@master
         with:
-          path: ${{ env.home}}/.env
+          path: .env
           contents: ${{ secrets.WEATHER_API_KEY }}
           write-mode: append
 
