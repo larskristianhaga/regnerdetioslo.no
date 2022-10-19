@@ -1,25 +1,4 @@
-[
-  {
-    "LocalObservationDateTime": "2022-09-30T19:05:00+02:00",
-    "EpochTime": 1664557500,
-    "WeatherText": "Mostly clear",
-    "WeatherIcon": 34,
-    "HasPrecipitation": false,
-    "PrecipitationType": null,
-    "IsDayTime": false,
-    "Temperature": {
-      "Metric": {
-        "Value": 8.9,
-        "Unit": "C",
-        "UnitType": 17
-      },
-      "Imperial": {
-        "Value": 48.0,
-        "Unit": "F",
-        "UnitType": 18
-      }
-    },
-    "MobileLink": "http://www.accuweather.com/en/no/oslo/254946/current-weather/254946?lang=en-us",
-    "Link": "http://www.accuweather.com/en/no/oslo/254946/current-weather/254946?lang=en-us"
-  }
-]
+{
+  "DoesItRain": false,
+  "LastUpdated": "A minute ago"
+}
