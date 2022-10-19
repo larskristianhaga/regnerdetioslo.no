@@ -19,6 +19,13 @@ jobs:
       - name: Running tests
         run: npm run test --if-present
 
+      - name: Appending API key to .env file
+        uses: DamianReeves/write-file-action@master
+        with:
+          path: .env
+          contents: ${{ secrets.BACKEND_ENDPOINT_URL }}
+          write-mode: append
+
       - name: Building the application
         run: npm run build
 

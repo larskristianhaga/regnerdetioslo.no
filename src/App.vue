@@ -1,6 +1,6 @@
 <template>
-  <div class="app">
-    <pre>{{ isItRaining }}</pre>
+  <div class="app-container">
+    <pre class="content">{{ isItRaining }}</pre>
   </div>
 </template>
 
@@ -11,22 +11,22 @@ export default {
   name: "App",
   data() {
     return {
-      // Default value
-      isItRaining: "Dont know..."
+      "isItRaining": ""
     };
   },
   mounted() {
-    const endpointURL = "https://dataservice.accuweather.com/currentconditions/v1/254946?apikey=" + import.meta.env.VITE_WEATHER_API_KEY;
+  // Endpoint is gotten from GitHub Actions Secret.
+  const endpointURL = import.meta.env.VITE_BACKEND_ENDPOINT_URL;
 
     axios.get(endpointURL)
       .then((response) => {
 
-        const isRainingValue = response.data[0].HasPrecipitation;
+      const isRainingValue = response.data["DoesItRain"];
 
         isRainingValue ?
-          this.isItRaining = "Yes..."
+          this.isItRaining = "Ja..."
           :
-          this.isItRaining = "Nope!";
+          this.isItRaining = "Nei!";
       })
       .catch((error) => {
         console.log("Something went wrong. " + error);
