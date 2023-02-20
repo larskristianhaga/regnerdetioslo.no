@@ -15,7 +15,7 @@ jobs:
         working-directory: ./app
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         
       - name: TEST
         run: ls
@@ -42,6 +42,7 @@ jobs:
       - name: Authenticating towards GCP
         id: auth
         uses: google-github-actions/auth@v0
+        working-directory: ./app
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
