@@ -12,14 +12,14 @@ jobs:
     timeout-minutes: 5
     defaults:
       run:
-        working-directory: ./app
+        working-directory: /app
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
-        
+
       - name: TEST
         run: ls
-        
+
       - name: TEST2
         run: pwd
 
@@ -42,7 +42,7 @@ jobs:
       - name: Authenticating towards GCP
         id: auth
         uses: google-github-actions/auth@v0
-        working-directory: ./app
+        deliverables: app/app.yaml
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
