@@ -1,4 +1,4 @@
-name: 'Deploy to App Engine on GCP'
+name: 'Deploy app to App Engine on GCP'
 
 on:
   workflow_dispatch:
@@ -10,12 +10,12 @@ jobs:
   'build-and-deploy':
     runs-on: ubuntu-20.04
     timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: ./app
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
-
-      - name: Go to the correct folder
-        run: cd app
         
       - name: TEST
         run: ls
@@ -29,7 +29,7 @@ jobs:
       - name: Running tests
         run: npm run test --if-present
 
-      - name: Appending API key to .env file
+      - name: Appending API endpoint to .env file
         uses: DamianReeves/write-file-action@master
         with:
           path: .env
