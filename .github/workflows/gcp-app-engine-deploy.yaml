@@ -17,12 +17,6 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v3
 
-      - name: TEST
-        run: ls
-
-      - name: TEST2
-        run: pwd
-
       - name: Installing dependencies
         run: npm ci
 
