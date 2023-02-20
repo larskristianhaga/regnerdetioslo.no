@@ -42,8 +42,8 @@ jobs:
       - name: Authenticating towards GCP
         id: auth
         uses: google-github-actions/auth@v0
-        deliverables: app/app.yaml
         with:
+          working-directory: /app
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Deploying the application to GCP
