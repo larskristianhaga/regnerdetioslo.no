@@ -16,6 +16,12 @@ jobs:
 
       - name: Go to the correct folder
         run: cd app
+        
+      - name: TEST
+        run: ls
+        
+      - name: TEST2
+        run: pwd
 
       - name: Installing dependencies
         run: npm ci
