@@ -1,4 +1,4 @@
-## Regnerdetioslo.no
+# Regnerdetioslo.no
 
 This repository contains the sourcecode for the website [regnerdetioslo.no](http://regnerdetioslo.no)
  
