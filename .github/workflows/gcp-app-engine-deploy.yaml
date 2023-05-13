@@ -7,7 +7,7 @@ on:
       - 'main'
 
 jobs:
-  'build-and-deploy':
+  'build-and-deploy-app':
     runs-on: ubuntu-20.04
     timeout-minutes: 5
     defaults:
