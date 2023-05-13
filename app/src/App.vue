@@ -1,7 +1,5 @@
 <template>
-  <div class="app-container">
-    <pre class="content">{{ isItRaining }}</pre>
-  </div>
+  <pre class="content">{{ isItRaining }}</pre>
 </template>
 
 <script>
