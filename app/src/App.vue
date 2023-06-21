@@ -9,26 +9,23 @@ export default {
   name: "App",
   data() {
     return {
-      "isItRaining": ""
+      isItRaining: "",
     };
   },
   mounted() {
-  // Endpoint is gotten from GitHub Actions Secret.
-  const endpointURL = import.meta.env.VITE_BACKEND_ENDPOINT_URL;
+    // Endpoint is gotten from GitHub Actions Secret.
+    const endpointURL = import.meta.env.VITE_BACKEND_ENDPOINT_URL;
 
-    axios.get(endpointURL)
+    axios
+      .get(endpointURL)
       .then((response) => {
+        const isRainingValue = response.data["DoesItRain"];
 
-      const isRainingValue = response.data["DoesItRain"];
-
-        isRainingValue ?
-          this.isItRaining = "Ja..."
-          :
-          this.isItRaining = "Nei!";
+        isRainingValue ? (this.isItRaining = "Ja") : (this.isItRaining = "Nei");
       })
       .catch((error) => {
         console.log("Something went wrong. " + error);
       });
-  }
+  },
 };
 </script>
