@@ -16,8 +16,8 @@ func init() {
 func RegnerDetIOsloFunction(w http.ResponseWriter, r *http.Request) {
 
 	// API endpoint.
-	endpoint := 
-"https://www.yr.no/api/v0/locations/1-72837/forecast/currenthour"
+	endpoint :=
+		"https://www.yr.no/api/v0/locations/1-72837/forecast/currenthour"
 
 	// Get data from the API.
 	response, err := http.Get(endpoint)
@@ -43,8 +43,13 @@ func RegnerDetIOsloFunction(w http.ResponseWriter, r *http.Request) {
 	doesItRain := yr.Precipitation.Value > 0
 	lastUpdatedAt := yr.Created
 
-	// Return the object.
+	// Enable CORS.
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	// Set the content type to JSON.
 	w.Header().Set("Content-Type", "application/json")
+
+	// Return the object.
 	_ = json.NewEncoder(w).Encode(struct {
 		DoesItRain   bool
 		DataFromTime string
@@ -59,4 +64,3 @@ type Yr struct {
 type Precipitation struct {
 	Value float32 `json:"value"`
 }
-
