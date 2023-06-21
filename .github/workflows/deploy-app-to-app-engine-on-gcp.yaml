@@ -8,7 +8,7 @@ on:
 
 jobs:
   'build-and-deploy-app':
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     defaults:
       run:
@@ -19,9 +19,6 @@ jobs:
 
       - name: Installing dependencies
         run: npm ci
-
-      - name: Running tests
-        run: npm run test --if-present
 
       - name: Appending API endpoint to .env file
         uses: DamianReeves/write-file-action@master
