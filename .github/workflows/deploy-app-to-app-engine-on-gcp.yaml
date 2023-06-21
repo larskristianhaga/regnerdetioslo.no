@@ -13,22 +13,14 @@ jobs:
     defaults:
       run:
         working-directory: ./app
+    env:
+      VITE_BACKEND_ENDPOINT_URL: ${{ secrets.BACKEND_ENDPOINT_URL }}
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
 
       - name: Installing dependencies
         run: npm ci
-
-      - name: Appending API endpoint to .env file
-        uses: DamianReeves/write-file-action@master
-        with:
-          path: .env
-          contents: ${{ secrets.BACKEND_ENDPOINT_URL }}
-          write-mode: append
-
-      - name: Printing the .env file
-        run: cat .env
 
       - name: Building the application
         run: npm run build
