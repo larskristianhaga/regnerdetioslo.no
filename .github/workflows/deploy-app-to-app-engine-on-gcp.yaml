@@ -27,6 +27,9 @@ jobs:
           contents: ${{ secrets.BACKEND_ENDPOINT_URL }}
           write-mode: append
 
+      - name: Printing the .env file
+        run: cat .env
+
       - name: Building the application
         run: npm run build
 
