@@ -70,7 +70,7 @@ func main() {
 
 	})
 
-	log.Println("App live and listening on port: ", port)
+	log.Println("App live and listening on port:", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
