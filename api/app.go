@@ -17,6 +17,10 @@ func main() {
 		port = "8080"
 	}
 
+	http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("pong"))
+	})
+
 	http.HandleFunc("/check", func(w http.ResponseWriter, r *http.Request) {
 		// Create a custom HTTP client with disabled SSL verification.
 		customTransport := &http.Transport{
