@@ -17,6 +17,10 @@ func main() {
 		port = "8080"
 	}
 
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		_, _ = w.Write([]byte("👋"))
+	})
+
 	http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
 		_, _ = w.Write([]byte("pong"))
 	})
