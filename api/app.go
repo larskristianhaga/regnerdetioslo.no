@@ -16,7 +16,7 @@ var resources embed.FS
 
 var t = template.Must(template.ParseFS(resources, "templates/*"))
 
-var endpoint = "https://www.yr.no/api/v0/locations/1-72837/forecast/currenthour"
+var yrEndpoint = "https://www.yr.no/api/v0/locations/1-72837/forecast/currenthour"
 var domain = "https://www.regnerdetioslo.no"
 
 func main() {
@@ -76,7 +76,7 @@ func getYrData() Yr {
 	}
 	client := &http.Client{Transport: customTransport}
 
-	response, err := client.Get(endpoint)
+	response, err := client.Get(yrEndpoint)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
