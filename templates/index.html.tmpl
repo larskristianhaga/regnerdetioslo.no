@@ -7,15 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="data-from-time" content="{{.dataFromTime}}"/>
     <title>Regnerdetioslo?</title>
+    <style>
+        h1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 75vh;
+            font-size: 20vh;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+    </style>
 </head>
 <body>
-<h1 style="display: flex;
-justify-content: center;
-align-items: center;
-height: 75vh;
-font-size: 20vh;
-font-family: 'Comic Sans MS', cursive, sans-serif;">
-{{.isRaining}}
-</h1>
+<h1>{{.isRaining}}</h1>
 </body>
 </html>
