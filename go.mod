@@ -1,3 +1,3 @@
-module regnerdetioslo.no/app/v1
+module regnerdetioslo.no/app
 
 go 1.23
