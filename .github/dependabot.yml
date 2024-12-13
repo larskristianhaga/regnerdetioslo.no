@@ -6,11 +6,11 @@ updates:
       interval: "weekly"
 
   - package-ecosystem: "gomod"
-    directory: "/api"
+    directory: "/"
     schedule:
       interval: "weekly"
 
   - package-ecosystem: "docker"
-    directory: "/api"
+    directory: "/"
     schedule:
       interval: "weekly"
