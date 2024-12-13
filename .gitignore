@@ -20,3 +20,6 @@ go.work.sum
 
 # Editor directories and files
 .idea
+
+# Mac directories
+.DS_Store
