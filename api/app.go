@@ -2,76 +2,97 @@ package main
 
 import (
 	"crypto/tls"
+	"embed"
 	"encoding/json"
+	"html/template"
 	"io"
 	"log"
 	"net/http"
 	"os"
 )
 
+//go:embed templates/*
+var resources embed.FS
+
+var t = template.Must(template.ParseFS(resources, "templates/*"))
+
 var endpoint = "https://www.yr.no/api/v0/locations/1-72837/forecast/currenthour"
+var domain = "https://www.regnerdetioslo.no"
 
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		_, _ = w.Write([]byte("👋"))
-	})
+	log.Println("App live and listening on port:", port)
 
 	http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
 		_, _ = w.Write([]byte("pong"))
 	})
 
-	http.HandleFunc("/check", func(w http.ResponseWriter, r *http.Request) {
-		// Create a custom HTTP client with disabled SSL verification.
-		customTransport := &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-		}
-		client := &http.Client{Transport: customTransport}
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		yrResponse := getYrData()
 
-		// Get data from the API using the custom client.
-		response, err := client.Get(endpoint)
-
-		// Guard for empty response.
-		if err != nil {
-			log.Fatal(err.Error())
+		isRaining := "Nei"
+		if yrResponse.Precipitation.Value > 0 {
+			isRaining = "Ja"
 		}
 
-		// Get the JSON data out of the response.
-		responseData, err := io.ReadAll(response.Body)
-
-		// Guard for something wrong with reading the content.
-		if err != nil {
-			log.Fatal(err.Error())
+		data := map[string]string{
+			"isRaining":    isRaining,
+			"dataFromTime": yrResponse.Created,
 		}
 
-		var yr Yr
-		// JSONIFY the string.
-		_ = json.Unmarshal(responseData, &yr)
-
-		// Extract the values I want.
-		doesItRain := yr.Precipitation.Value > 0
-		lastUpdatedAt := yr.Created
-
-		// Enable CORS.
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-
-		// Set the content type to JSON.
-		w.Header().Set("Content-Type", "application/json")
-
-		// Return the object.
-		_ = json.NewEncoder(w).Encode(struct {
-			DoesItRain   bool
-			DataFromTime string
-		}{DoesItRain: doesItRain, DataFromTime: lastUpdatedAt})
-
+		_ = t.ExecuteTemplate(w, "index.html.tmpl", data)
 	})
 
-	log.Println("App live and listening on port:", port)
+	http.HandleFunc("/robots.txt", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/plain")
+
+		data := map[string]string{
+			"URL": domain + "/sitemap.xml",
+		}
+
+		_ = t.ExecuteTemplate(w, "robots.txt.tmpl", data)
+	})
+
+	http.HandleFunc("/sitemap.xml", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/xml")
+
+		data := map[string]string{
+			"URL": domain,
+		}
+
+		_ = t.ExecuteTemplate(w, "sitemap.xml.tmpl", data)
+	})
+
 	log.Fatal(http.ListenAndServe(":"+port, nil))
+}
+
+func getYrData() Yr {
+	// Create a custom HTTP client with disabled SSL verification.
+	customTransport := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	client := &http.Client{Transport: customTransport}
+
+	response, err := client.Get(endpoint)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	responseData, err := io.ReadAll(response.Body)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	var yr Yr
+	err = json.Unmarshal(responseData, &yr)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	return yr
 }
 
 type Yr struct {
