@@ -30,6 +30,10 @@ func main() {
 		_, _ = w.Write([]byte("pong"))
 	})
 
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		_, _ = w.Write([]byte("I'm healthy"))
+	})
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		yrResponse := getYrData()
 
