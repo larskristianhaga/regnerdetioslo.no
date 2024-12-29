@@ -101,7 +101,6 @@ func getYrData() Yr {
 	return yr
 }
 
-// Create a custom HTTP client with disabled SSL verification.
 func createInsecureHTTPClient() *http.Client {
 	customTransport := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
