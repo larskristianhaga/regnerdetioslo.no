@@ -26,51 +26,57 @@ func main() {
 	}
 	log.Println("App live and listening on port:", port)
 
-	http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-		_, _ = w.Write([]byte("pong"))
-	})
-
-	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
-		_, _ = w.Write([]byte("I'm healthy"))
-	})
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		yrResponse := getYrData()
-
-		isRaining := "Nei"
-		if yrResponse.Precipitation.Value > 0 {
-			isRaining = "Ja"
-		}
-
-		data := map[string]string{
-			"isRaining":    isRaining,
-			"dataFromTime": yrResponse.Created,
-		}
-
-		_ = t.ExecuteTemplate(w, "index.html.tmpl", data)
-	})
-
-	http.HandleFunc("/robots.txt", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/plain")
-
-		data := map[string]string{
-			"URL": domain + "/sitemap.xml",
-		}
-
-		_ = t.ExecuteTemplate(w, "robots.txt.tmpl", data)
-	})
-
-	http.HandleFunc("/sitemap.xml", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/xml")
-
-		data := map[string]string{
-			"URL": domain,
-		}
-
-		_ = t.ExecuteTemplate(w, "sitemap.xml.tmpl", data)
-	})
+	http.HandleFunc("/", RootHandler)
+	http.HandleFunc("/ping", PingHandler)
+	http.HandleFunc("/health", HealthHandler)
+	http.HandleFunc("/robots.txt", RobotsHandler)
+	http.HandleFunc("/sitemap.xml", SitemapHandler)
 
 	log.Fatal(http.ListenAndServe(":"+port, nil))
+}
+
+func RootHandler(w http.ResponseWriter, _ *http.Request) {
+	yrResponse := getYrData()
+
+	isRaining := "Nei"
+	if yrResponse.Precipitation.Value > 0 {
+		isRaining = "Ja"
+	}
+
+	data := map[string]string{
+		"isRaining":    isRaining,
+		"dataFromTime": yrResponse.Created,
+	}
+
+	_ = t.ExecuteTemplate(w, "index.html.tmpl", data)
+}
+
+func PingHandler(w http.ResponseWriter, _ *http.Request) {
+	_, _ = w.Write([]byte("pong"))
+}
+
+func HealthHandler(w http.ResponseWriter, _ *http.Request) {
+	_, _ = w.Write([]byte("I'm healthy"))
+}
+
+func RobotsHandler(w http.ResponseWriter, _ *http.Request) {
+	w.Header().Set("Content-Type", "text/plain")
+
+	data := map[string]string{
+		"URL": domain + "/sitemap.xml",
+	}
+
+	_ = t.ExecuteTemplate(w, "robots.txt.tmpl", data)
+}
+
+func SitemapHandler(w http.ResponseWriter, _ *http.Request) {
+	w.Header().Set("Content-Type", "application/xml")
+
+	data := map[string]string{
+		"URL": domain,
+	}
+
+	_ = t.ExecuteTemplate(w, "sitemap.xml.tmpl", data)
 }
 
 func getYrData() Yr {
