@@ -74,7 +74,7 @@ func main() {
 }
 
 func getYrData() Yr {
-	client := createCustomHTTPClient()
+	client := createInsecureHTTPClient()
 
 	response, err := client.Get(yrEndpoint)
 	if err != nil {
@@ -96,7 +96,7 @@ func getYrData() Yr {
 }
 
 // Create a custom HTTP client with disabled SSL verification.
-func createCustomHTTPClient() *http.Client {
+func createInsecureHTTPClient() *http.Client {
 	customTransport := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 	}
