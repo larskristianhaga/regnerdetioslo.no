@@ -27,7 +27,6 @@ func main() {
 	log.Println("App live and listening on port:", port)
 
 	http.HandleFunc("/", RootHandler)
-	http.HandleFunc("/ping", PingHandler)
 	http.HandleFunc("/health", HealthHandler)
 	http.HandleFunc("/robots.txt", RobotsHandler)
 	http.HandleFunc("/sitemap.xml", SitemapHandler)
@@ -51,9 +50,6 @@ func RootHandler(w http.ResponseWriter, _ *http.Request) {
 	_ = t.ExecuteTemplate(w, "index.html.tmpl", data)
 }
 
-func PingHandler(w http.ResponseWriter, _ *http.Request) {
-	_, _ = w.Write([]byte("pong"))
-}
 
 func HealthHandler(w http.ResponseWriter, _ *http.Request) {
 	_, _ = w.Write([]byte("I'm healthy"))
