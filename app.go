@@ -1,10 +1,10 @@
 package main
 
 import (
-    "fmt"
 	"crypto/tls"
 	"embed"
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"io"
 	"log"
@@ -95,7 +95,7 @@ func HealthHandler(w http.ResponseWriter, _ *http.Request) {
 
 func RobotsHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
-	fmt.Fprint(w, `User-agent: *
+	_, _ = fmt.Fprint(w, `User-agent: *
 Allow: /
 
 Sitemap: `+domain+`/sitemap.xml`)
@@ -103,7 +103,7 @@ Sitemap: `+domain+`/sitemap.xml`)
 
 func SitemapHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/xml")
-	fmt.Fprint(w, `<?xml version="1.0" encoding="UTF-8"?>
+	_, _ = fmt.Fprint(w, `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>`+domain+`</loc>
