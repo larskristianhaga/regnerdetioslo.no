@@ -18,7 +18,7 @@ var resources embed.FS
 var t = template.Must(template.ParseFS(resources, "templates/*"))
 
 var yrEndpoint = "https://www.yr.no/api/v0/locations/1-72837/forecast/currenthour"
-var domain = "https://www.regnerdetioslo.no"
+var domain = "https://regnerdetioslo.no"
 
 func main() {
 	port := os.Getenv("PORT")
