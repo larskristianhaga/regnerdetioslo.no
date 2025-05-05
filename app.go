@@ -31,6 +31,7 @@ func main() {
 	http.HandleFunc("/health", HealthHandler)
 	http.HandleFunc("/robots.txt", RobotsHandler)
 	http.HandleFunc("/sitemap.xml", SitemapHandler)
+	http.HandleFunc("/links", LinksHandler)
 
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
@@ -97,6 +98,7 @@ func RobotsHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
 	fmt.Fprint(w, `User-agent: *
 Allow: /
+Allow: /links
 
 Sitemap: `+domain+`/sitemap.xml`)
 }
@@ -108,5 +110,12 @@ func SitemapHandler(w http.ResponseWriter, _ *http.Request) {
     <url>
         <loc>`+domain+`</loc>
     </url>
+    <url>
+        <loc>`+domain+`/links</loc>
+    </url>
 </urlset>`)
+}
+
+func LinksHandler(w http.ResponseWriter, r *http.Request) {
+    http.ServeFile(w, r, "templates/links.html")
 }
