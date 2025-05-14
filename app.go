@@ -116,6 +116,6 @@ func SitemapHandler(w http.ResponseWriter, _ *http.Request) {
 </urlset>`)
 }
 
-func LinksHandler(w http.ResponseWriter, r *http.Request) {
-    http.ServeFile(w, r, "templates/links.html")
+func LinksHandler(w http.ResponseWriter, _ *http.Request) {
+	_ = t.ExecuteTemplate(w, "index.html.tmpl", nil)
 }
