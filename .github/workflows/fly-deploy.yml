@@ -1,4 +1,6 @@
 name: "Deploy app to Fly.io"
+permissions:
+  contents: read
 on:
   workflow_dispatch:
   push:

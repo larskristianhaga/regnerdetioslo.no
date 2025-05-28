@@ -98,9 +98,7 @@ func RobotsHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
 	_, _ = fmt.Fprint(w, `User-agent: *
 Allow: /
-Allow: /links
-
-Sitemap: `+domain+`/sitemap.xml`)
+Allow: /links`)
 }
 
 func SitemapHandler(w http.ResponseWriter, _ *http.Request) {
