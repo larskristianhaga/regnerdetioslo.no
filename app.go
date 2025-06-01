@@ -120,7 +120,6 @@ func LinksHandler(w http.ResponseWriter, _ *http.Request) {
 
 func loggingMiddleware(next http.HandlerFunc) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
-        // Extract client IP
         ip := r.Header.Get("X-Forwarded-For")
         if ip == "" {
             ip = r.Header.Get("X-Real-IP")
@@ -132,11 +131,8 @@ func loggingMiddleware(next http.HandlerFunc) http.HandlerFunc {
         userAgent := r.Header.Get("User-Agent")
         event := r.URL.Path
 
-        // Log in your format
-        log.Printf("Request incoming; IP: %s Event: %s Status: - UserAgent: %s", 
-            ip, event, userAgent)
+	log.Printf("Request incoming; IP: %s Event: \"%s\" Status: \"%s\" UserAgent:\"%s\"", remoteAddr, request, status, httpUserAgent)
 
-        // Call the next handler
         next(w, r)
     }
 }
