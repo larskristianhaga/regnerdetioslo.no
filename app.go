@@ -28,8 +28,6 @@ func main() {
 	log.Println("App live and listening on port:", port)
 
 	http.HandleFunc("/", loggingMiddleware(RootHandler))
-
-	http.HandleFunc("/", loggingMiddleware(RootHandler))
 	http.HandleFunc("/health", loggingMiddleware(HealthHandler))
 	http.HandleFunc("/robots.txt", loggingMiddleware(RobotsHandler))
 	http.HandleFunc("/sitemap.xml", loggingMiddleware(SitemapHandler))
