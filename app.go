@@ -27,11 +27,13 @@ func main() {
 	}
 	log.Println("App live and listening on port:", port)
 
-	http.HandleFunc("/", RootHandler)
-	http.HandleFunc("/health", HealthHandler)
-	http.HandleFunc("/robots.txt", RobotsHandler)
-	http.HandleFunc("/sitemap.xml", SitemapHandler)
-	http.HandleFunc("/links", LinksHandler)
+	http.HandleFunc("/", loggingMiddleware(RootHandler))
+
+	http.HandleFunc("/", loggingMiddleware(RootHandler))
+	http.HandleFunc("/health", loggingMiddleware(HealthHandler))
+	http.HandleFunc("/robots.txt", loggingMiddleware(RobotsHandler))
+	http.HandleFunc("/sitemap.xml", loggingMiddleware(SitemapHandler))
+	http.HandleFunc("/links", loggingMiddleware(LinksHandler))
 
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
@@ -116,4 +118,27 @@ func SitemapHandler(w http.ResponseWriter, _ *http.Request) {
 
 func LinksHandler(w http.ResponseWriter, _ *http.Request) {
 	_ = t.ExecuteTemplate(w, "index.html.tmpl", nil)
+}
+
+func loggingMiddleware(next http.HandlerFunc) http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
+        // Extract client IP
+        ip := r.Header.Get("X-Forwarded-For")
+        if ip == "" {
+            ip = r.Header.Get("X-Real-IP")
+        }
+        if ip == "" {
+            ip = r.RemoteAddr
+        }
+
+        userAgent := r.Header.Get("User-Agent")
+        event := r.URL.Path
+
+        // Log in your format
+        log.Printf("Request incoming; IP: %s Event: %s Status: - UserAgent: %s", 
+            ip, event, userAgent)
+
+        // Call the next handler
+        next(w, r)
+    }
 }
