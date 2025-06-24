@@ -121,7 +121,7 @@ func LinksHandler(w http.ResponseWriter, _ *http.Request) {
 
 func SecurityHandler(w http.ResponseWriter, _ *http.Request) {
 	_, _ = fmt.Fprint(w, `Contact: mailto:larskhaga@gmail.com
-Expires: 2030-12-31T22:59:00.000Z
+Expires: 2030-12-31T23:59:00.000Z
 Canonical: https://regnerdetioslo.no/.well-known/security.txt
 `)
 }
