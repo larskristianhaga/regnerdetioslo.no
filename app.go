@@ -32,6 +32,7 @@ func main() {
 	http.HandleFunc("/robots.txt", loggingMiddleware(RobotsHandler))
 	http.HandleFunc("/sitemap.xml", loggingMiddleware(SitemapHandler))
 	http.HandleFunc("/links", loggingMiddleware(LinksHandler))
+	http.HandleFunc("/.well-known/security.txt", loggingMiddleware(SecurityHandler))
 
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
@@ -116,6 +117,13 @@ func SitemapHandler(w http.ResponseWriter, _ *http.Request) {
 
 func LinksHandler(w http.ResponseWriter, _ *http.Request) {
 	_ = t.ExecuteTemplate(w, "index.html.tmpl", nil)
+}
+
+func SecurityHandler(w http.ResponseWriter, _ *http.Request) {
+	_, _ = fmt.Fprint(w, `Contact: mailto:larskhaga@gmail.com
+Expires: 2030-12-31T22:59:00.000Z
+Canonical: https://regnerdetioslo.no/.well-known/security.txt
+`)
 }
 
 func loggingMiddleware(next http.HandlerFunc) http.HandlerFunc {
