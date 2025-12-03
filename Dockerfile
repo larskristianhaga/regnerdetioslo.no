@@ -8,7 +8,7 @@ RUN go mod download && go mod verify
 
 COPY . .
 
-RUN CGO_ENABLED=0 go build -v -o /run-app .
+RUN go build -v -o /run-app .
 
 FROM gcr.io/distroless/static-debian12
 
